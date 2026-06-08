@@ -1,0 +1,172 @@
+:root {
+  --al-primary: #2563EB;
+  --al-bg: #FFFFFF;
+  --al-fg: #1F2937;
+  --al-muted: #6B7280;
+  --al-border: #E5E7EB;
+  --al-surface: #F9FAFB;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --al-bg: #0B1220;
+    --al-fg: #F3F4F6;
+    --al-muted: #9CA3AF;
+    --al-border: #374151;
+    --al-surface: #1F2937;
+  }
+}
+
+* { box-sizing: border-box; }
+
+/* see panel.css for why this override is needed: author `display: flex` rules
+   (e.g. .al-logo-preview) otherwise beat [hidden] by source order. */
+[hidden] { display: none !important; }
+
+body {
+  margin: 0;
+  font-family: -apple-system, "Segoe UI", Roboto, sans-serif;
+  background: var(--al-surface);
+  color: var(--al-fg);
+}
+
+.al-options {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 32px 20px 80px;
+}
+
+h1 { font-size: 22px; margin-bottom: 4px; }
+h2 { font-size: 16px; margin: 0 0 8px; }
+
+.al-privacy-note {
+  background: var(--al-bg);
+  border: 1px solid var(--al-border);
+  border-radius: 10px;
+  padding: 12px 16px;
+  font-size: 13px;
+  color: var(--al-muted);
+}
+
+.al-card {
+  background: var(--al-bg);
+  border: 1px solid var(--al-border);
+  border-radius: 12px;
+  padding: 20px;
+  margin-top: 16px;
+}
+
+.al-hint { font-size: 12px; color: var(--al-muted); margin: 4px 0 12px; }
+
+.al-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 13px;
+  font-weight: 600;
+  margin-bottom: 14px;
+}
+
+.al-field input[type="text"],
+.al-field select {
+  font: inherit;
+  padding: 8px 10px;
+  border: 1px solid var(--al-border);
+  border-radius: 8px;
+  background: var(--al-bg);
+  color: var(--al-fg);
+}
+
+.al-field input[type="color"] {
+  width: 60px;
+  height: 36px;
+  padding: 2px;
+  border: 1px solid var(--al-border);
+  border-radius: 8px;
+  background: var(--al-bg);
+}
+
+.al-logo-preview {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: -6px 0 14px;
+}
+
+.al-logo-preview img {
+  width: 56px;
+  height: 56px;
+  object-fit: contain;
+  border: 1px solid var(--al-border);
+  border-radius: 8px;
+  background: white;
+}
+
+.al-link-btn {
+  border: none;
+  background: none;
+  color: var(--al-primary);
+  font-size: 12px;
+  cursor: pointer;
+  text-decoration: underline;
+  padding: 0;
+}
+
+.al-btn {
+  border: none;
+  border-radius: 8px;
+  padding: 9px 16px;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.al-btn-primary { background: var(--al-primary); color: white; }
+.al-btn-primary:hover { background: #1D4ED8; }
+.al-btn-secondary { background: var(--al-surface); color: var(--al-fg); border: 1px solid var(--al-border); }
+.al-btn-secondary:hover { background: var(--al-border); }
+
+.al-btn:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+  background: var(--al-surface);
+  color: var(--al-muted, #6B7280);
+  border: 1px solid var(--al-border);
+}
+.al-btn:disabled:hover { background: var(--al-surface); }
+
+.al-btn-row { display: flex; gap: 10px; align-items: center; }
+
+.al-saved-msg { font-size: 12px; color: #16A34A; font-weight: 700; margin-left: 10px; }
+
+.al-plan-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+  margin-bottom: 16px;
+}
+
+.al-plan-table th, .al-plan-table td {
+  text-align: center;
+  padding: 8px 6px;
+  border-bottom: 1px solid var(--al-border);
+}
+
+.al-plan-table th:first-child, .al-plan-table td:first-child {
+  text-align: left;
+  color: var(--al-muted);
+  font-weight: 600;
+}
+
+.al-badge-soon {
+  display: inline-block;
+  font-size: 10px;
+  font-weight: 800;
+  text-transform: uppercase;
+  background: #FDE68A;
+  color: #92400E;
+  border-radius: 999px;
+  padding: 2px 6px;
+  margin-left: 4px;
+  vertical-align: middle;
+}

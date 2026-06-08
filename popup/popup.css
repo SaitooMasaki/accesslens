@@ -1,0 +1,96 @@
+:root {
+  --al-primary: #2563EB;
+  --al-bg: #FFFFFF;
+  --al-fg: #1F2937;
+  --al-muted: #6B7280;
+  --al-border: #E5E7EB;
+  --al-surface: #F9FAFB;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --al-bg: #111827;
+    --al-fg: #F3F4F6;
+    --al-muted: #9CA3AF;
+    --al-border: #374151;
+    --al-surface: #1F2937;
+  }
+}
+
+* { box-sizing: border-box; }
+
+/* see panel.css for why this override is needed: author `display: flex` rules
+   otherwise beat [hidden] by source order. */
+[hidden] { display: none !important; }
+
+body {
+  margin: 0;
+  width: 280px;
+  font-family: -apple-system, "Segoe UI", Roboto, sans-serif;
+  font-size: 14px;
+  background: var(--al-bg);
+  color: var(--al-fg);
+}
+
+.al-popup { padding: 16px; display: flex; flex-direction: column; gap: 12px; }
+
+.al-popup-header { display: flex; align-items: center; gap: 8px; }
+.al-popup-title { font-weight: 800; font-size: 16px; flex: 1; }
+
+.al-logo-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--al-primary);
+  display: inline-block;
+}
+
+.al-plan-badge {
+  font-size: 11px;
+  font-weight: 700;
+  padding: 3px 8px;
+  border-radius: 999px;
+  background: var(--al-surface);
+  border: 1px solid var(--al-border);
+  color: var(--al-muted);
+}
+
+.al-plan-badge.al-plan-pro,
+.al-plan-badge.al-plan-agency {
+  background: var(--al-primary);
+  color: white;
+  border-color: var(--al-primary);
+}
+
+.al-popup-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+  color: var(--al-muted);
+}
+
+.al-popup-value { font-weight: 700; color: var(--al-fg); }
+
+.al-btn {
+  border: none;
+  border-radius: 8px;
+  padding: 10px 14px;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.al-btn-block { width: 100%; }
+.al-btn-primary { background: var(--al-primary); color: white; }
+.al-btn-primary:hover { background: #1D4ED8; }
+.al-btn-upgrade { background: #FACC15; color: #1F2937; }
+.al-btn-upgrade:hover { background: #EAB308; }
+
+.al-settings-link {
+  text-align: center;
+  font-size: 12px;
+  color: var(--al-muted);
+  text-decoration: none;
+}
+
+.al-settings-link:hover { text-decoration: underline; }

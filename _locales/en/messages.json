@@ -1,0 +1,34 @@
+{
+  "extName": {
+    "message": "AccessLens",
+    "description": "Extension name shown in the Chrome Web Store and chrome://extensions"
+  },
+  "extDescription": {
+    "message": "Audit any web page for WCAG accessibility issues and generate white-label client reports.",
+    "description": "Extension description"
+  },
+  "scanThisPage": {
+    "message": "Scan this page",
+    "description": "Primary scan action button"
+  },
+  "complianceScore": {
+    "message": "WCAG Compliance Score",
+    "description": "Label for the score card"
+  },
+  "filterBySeverity": {
+    "message": "Severity",
+    "description": "Filter group label for impact/severity"
+  },
+  "filterByLevel": {
+    "message": "WCAG Level",
+    "description": "Filter group label for WCAG conformance level"
+  },
+  "exportPdf": {
+    "message": "Export white-label PDF",
+    "description": "Button to export a branded PDF report (Pro feature)"
+  },
+  "pdfProOnly": {
+    "message": "PDF export is a Pro feature. Upgrade to generate white-label client reports.",
+    "description": "Hint shown to Free users near the disabled PDF export button"
+  }
+}

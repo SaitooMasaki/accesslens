@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>AccessLens</title>
+  <link rel="stylesheet" href="panel.css" />
+</head>
+<body>
+  <header class="al-header">
+    <div class="al-brand">
+      <span class="al-logo-dot"></span>
+      <span class="al-brand-name" data-i18n="extName">AccessLens</span>
+    </div>
+    <button id="al-scan-btn" class="al-btn al-btn-primary" data-i18n="scanThisPage">Scan this page</button>
+  </header>
+
+  <div id="al-scan-status" class="al-status" hidden></div>
+
+  <section id="al-summary" class="al-summary" hidden>
+    <div class="al-score-card">
+      <div class="al-score-value" id="al-score-value">--</div>
+      <div class="al-score-label" data-i18n="complianceScore">WCAG Compliance Score</div>
+    </div>
+    <div class="al-impact-badges" id="al-impact-badges"></div>
+  </section>
+
+  <section id="al-filters" class="al-filters" hidden>
+    <div class="al-filter-group">
+      <span class="al-filter-label" data-i18n="filterBySeverity">Severity</span>
+      <label><input type="checkbox" class="al-filter-impact" value="critical" checked /> Critical</label>
+      <label><input type="checkbox" class="al-filter-impact" value="serious" checked /> Serious</label>
+      <label><input type="checkbox" class="al-filter-impact" value="moderate" checked /> Moderate</label>
+      <label><input type="checkbox" class="al-filter-impact" value="minor" checked /> Minor</label>
+    </div>
+    <div class="al-filter-group">
+      <span class="al-filter-label" data-i18n="filterByLevel">WCAG Level</span>
+      <label><input type="checkbox" class="al-filter-level" value="A" checked /> A</label>
+      <label><input type="checkbox" class="al-filter-level" value="AA" checked /> AA</label>
+      <label><input type="checkbox" class="al-filter-level" value="AAA" checked /> AAA</label>
+    </div>
+  </section>
+
+  <section id="al-results" class="al-results"></section>
+
+  <footer class="al-footer">
+    <button id="al-export-pdf-btn" class="al-btn al-btn-secondary" hidden data-i18n="exportPdf">Export white-label PDF</button>
+    <div id="al-pdf-locked-hint" class="al-hint" hidden data-i18n="pdfProOnly">PDF export is a Pro feature. Upgrade to generate white-label client reports.</div>
+  </footer>
+
+  <template id="al-tooltip-template">
+    <span class="al-tooltip" tabindex="0"></span>
+  </template>
+
+  <script type="module" src="panel.js"></script>
+</body>
+</html>

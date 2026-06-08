@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>AccessLens E2E Fixture</title>
+  <style>
+    body { font-family: sans-serif; padding: 24px; }
+    .low-contrast { color: #aaaaaa; background: #ffffff; }
+  </style>
+</head>
+<body>
+  <h1>Sample page with deliberate accessibility issues</h1>
+
+  <!-- image-alt: missing alt text -->
+  <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNk+A8AAQUBAScY42YAAAAASUVORK5CYII=" />
+
+  <!-- color-contrast: low contrast text -->
+  <p class="low-contrast">This text has very low contrast against its background.</p>
+
+  <!-- label: input without an associated label -->
+  <input type="text" placeholder="Enter your name" />
+
+  <!-- link-name: link with no discernible text -->
+  <a href="#"></a>
+
+  <!-- heading-order: skips from h1 to h4 -->
+  <h4>Skipped heading levels</h4>
+
+  <button></button>
+</body>
+</html>

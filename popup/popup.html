@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>AccessLens</title>
+  <link rel="stylesheet" href="popup.css" />
+</head>
+<body>
+  <div class="al-popup">
+    <header class="al-popup-header">
+      <span class="al-logo-dot"></span>
+      <span class="al-popup-title">AccessLens</span>
+      <span id="al-plan-badge" class="al-plan-badge">Free</span>
+    </header>
+
+    <div class="al-popup-row">
+      <span class="al-popup-label">Scans today</span>
+      <span id="al-scan-count" class="al-popup-value">0 / 5</span>
+    </div>
+
+    <button id="al-scan-btn" class="al-btn al-btn-primary al-btn-block">Scan this page</button>
+
+    <button id="al-upgrade-btn" class="al-btn al-btn-upgrade al-btn-block" hidden>Upgrade to Pro</button>
+
+    <a id="al-settings-link" class="al-settings-link" href="#">Settings</a>
+  </div>
+  <script type="module" src="popup.js"></script>
+</body>
+</html>

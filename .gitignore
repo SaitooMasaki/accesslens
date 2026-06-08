@@ -1,0 +1,7 @@
+node_modules/
+e2e/.profile/
+e2e/.profiles/
+e2e/.test-ext/
+e2e/*.log
+*.log
+.DS_Store
