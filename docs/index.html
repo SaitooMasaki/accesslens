@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>AccessLens — Privacy Policy</title>
+  <style>
+    :root {
+      --fg: #1F2937;
+      --muted: #6B7280;
+      --primary: #2563EB;
+      --border: #E5E7EB;
+      --surface: #F9FAFB;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      color: var(--fg);
+      line-height: 1.65;
+      background: #fff;
+    }
+    .wrap {
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 48px 24px 96px;
+    }
+    h1 { font-size: 28px; margin-bottom: 4px; }
+    h2 { font-size: 19px; margin-top: 40px; border-top: 1px solid var(--border); padding-top: 24px; }
+    h3 { font-size: 16px; margin-top: 24px; }
+    p, li { color: var(--fg); }
+    .meta { color: var(--muted); font-size: 14px; margin-bottom: 32px; }
+    code {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 1px 5px;
+      font-size: 0.92em;
+    }
+    table { border-collapse: collapse; width: 100%; margin: 16px 0; font-size: 14px; }
+    th, td { border: 1px solid var(--border); padding: 8px 12px; text-align: left; vertical-align: top; }
+    th { background: var(--surface); }
+    a { color: var(--primary); }
+    .badge {
+      display: inline-block;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      padding: 2px 10px;
+      font-size: 12px;
+      color: var(--muted);
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <h1>AccessLens — Privacy Policy</h1>
+    <p class="meta">Last updated: June 8, 2026 &nbsp;·&nbsp; <span class="badge">Applies to the AccessLens Chrome Extension</span></p>
+
+    <p>
+      AccessLens (“the Extension”, “we”, “us”) is a Chrome extension that helps web
+      professionals check websites for accessibility issues (WCAG conformance) and
+      generate client-ready reports. This Privacy Policy explains what data the
+      Extension handles, where it is stored, and what — if anything — leaves your
+      browser.
+    </p>
+
+    <p>
+      <strong>The short version:</strong> AccessLens has no backend server of its own.
+      Everything it does — scanning pages, storing your clients/projects/scan history,
+      and generating PDF reports — happens locally, inside your browser, on your device.
+      The only outside service the Extension talks to is Lemon Squeezy, and only for the
+      narrow purpose of checking whether you have an active Pro/Agency license.
+    </p>
+
+    <h2>1. Data the Extension processes, and where it stays</h2>
+
+    <h3>1.1 Pages you scan</h3>
+    <p>
+      When you click “Scan this page”, AccessLens runs the open-source
+      <a href="https://github.com/dequelabs/axe-core" target="_blank" rel="noopener">axe-core</a>
+      accessibility engine directly inside the page you are viewing. The scan —
+      including the page’s URL, its HTML structure, and the list of accessibility
+      issues found — is processed <strong>entirely inside your browser</strong>.
+      Nothing about the page you scan is sent to AccessLens or to any third party.
+    </p>
+
+    <h3>1.2 Clients, projects, and scan history you create</h3>
+    <p>
+      To help you organize audits across multiple clients and websites, AccessLens lets
+      you save “clients”, “projects”, and scan results. This information — along with
+      your settings (such as a logo or company name used for white-label PDF reports,
+      and your daily scan count) — is stored using the browser’s built-in
+      <code>chrome.storage.local</code> API. It stays on your device and is never
+      transmitted to AccessLens or any third-party server.
+    </p>
+    <p>
+      If you remove the Extension, this locally stored data is deleted by Chrome along
+      with it. You can also clear it at any time from the Extension’s settings or via
+      <code>chrome://extensions</code>.
+    </p>
+
+    <h3>1.3 PDF reports</h3>
+    <p>
+      White-label PDF reports (a Pro/Agency feature) are generated entirely on your
+      device using the open-source <a href="https://github.com/parallax/jsPDF" target="_blank" rel="noopener">jsPDF</a>
+      library. The report is built and downloaded locally — it is never uploaded to a
+      server in order to be created.
+    </p>
+
+    <h2>2. The one external service we do use: license verification</h2>
+    <p>
+      AccessLens offers paid Pro/Agency plans that unlock features such as unlimited
+      scans and white-label PDF export. To verify that a license is active, the
+      Extension communicates directly with
+      <a href="https://www.lemonsqueezy.com/" target="_blank" rel="noopener">Lemon Squeezy</a>’s
+      License API at <code>https://api.lemonsqueezy.com</code>. This is the
+      <em>only</em> network host the Extension is permitted to contact
+      (see its <code>host_permissions</code> in the manifest).
+    </p>
+    <p>When you activate, validate, or deactivate a license, the following is sent to Lemon Squeezy:</p>
+    <ul>
+      <li>The license key you entered (received from Lemon Squeezy when you purchased a plan)</li>
+      <li>A device-specific “instance” identifier derived from your browser’s extension ID
+        (used solely so Lemon Squeezy can track how many devices a license is activated on)</li>
+    </ul>
+    <p>
+      No browsing data, scan results, or personal files are included in these requests.
+      Lemon Squeezy acts as the merchant of record for purchases and processes payment
+      and license data under its own privacy policy, available at
+      <a href="https://www.lemonsqueezy.com/privacy" target="_blank" rel="noopener">lemonsqueezy.com/privacy</a>.
+    </p>
+
+    <h2>3. Permissions the Extension requests, and why</h2>
+    <table>
+      <thead><tr><th>Permission</th><th>Why it’s needed</th></tr></thead>
+      <tbody>
+        <tr><td><code>activeTab</code> / <code>scripting</code></td>
+            <td>To run an accessibility scan on the page you are currently viewing, only when you choose to scan it.</td></tr>
+        <tr><td><code>storage</code></td>
+            <td>To save your clients, projects, scan history, settings, and license status locally on your device.</td></tr>
+        <tr><td><code>sidePanel</code></td>
+            <td>To display the AccessLens panel alongside the page you are auditing.</td></tr>
+        <tr><td><code>alarms</code></td>
+            <td>To periodically re-check your license status (about once every 24 hours) so paid features keep working without you having to re-enter your key.</td></tr>
+        <tr><td><code>host_permissions</code>:<br><code>https://api.lemonsqueezy.com/*</code></td>
+            <td>The only external host the Extension can contact — used exclusively for license activation/validation as described above.</td></tr>
+      </tbody>
+    </table>
+    <p>
+      AccessLens does <strong>not</strong> request broad host permissions (such as
+      access to all websites) and does not include any analytics, advertising, or
+      tracking code.
+    </p>
+
+    <h2>4. Data sharing and sale</h2>
+    <p>
+      We do not sell, rent, or share your data with advertisers or data brokers. We
+      have no servers that receive your browsing activity, scan results, or stored
+      client/project data — there is simply nothing of that kind for us to share,
+      because it never leaves your device.
+    </p>
+
+    <h2>5. Data retention and deletion</h2>
+    <p>
+      Locally stored data persists in <code>chrome.storage.local</code> until you
+      delete it from within the Extension, clear it via <code>chrome://extensions</code>,
+      or uninstall the Extension (which removes all of its local storage automatically).
+      License information held by Lemon Squeezy is retained and managed according to
+      Lemon Squeezy’s own privacy policy and your account with them.
+    </p>
+
+    <h2>6. Children’s privacy</h2>
+    <p>
+      AccessLens is a professional tool intended for web developers, designers, and
+      agencies. It is not directed at children, and we do not knowingly collect
+      information from children.
+    </p>
+
+    <h2>7. Changes to this policy</h2>
+    <p>
+      If this policy changes, we will update this page and revise the “Last updated”
+      date above. Continued use of the Extension after changes are posted constitutes
+      acceptance of the revised policy.
+    </p>
+
+    <h2>8. Contact</h2>
+    <p>
+      Questions about this policy or how AccessLens handles data can be sent to:
+      <a href="mailto:m.masaki.sm@gmail.com">m.masaki.sm@gmail.com</a>
+    </p>
+  </div>
+</body>
+</html>
