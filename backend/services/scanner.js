@@ -1,9 +1,13 @@
-/**
- * Phase 2-2: Puppeteer + axe-core によるサーバーサイドスキャン。
- * このファイルは Phase 2-1 でインターフェースだけを定義する。
- * 実際の実装は Issue #3 (Phase 2-2) で行う。
- */
+import puppeteer from 'puppeteer';
+import { createRequire } from 'node:module';
 import { logger } from '../logger.js';
+
+// axe-core のブラウザバンドルへのパスを解決する
+const require = createRequire(import.meta.url);
+const axeCorePath = require.resolve('axe-core');
+
+// Phase 1 の拡張機能と同じルールセットを使い、結果の一貫性を保つ
+const AXE_TAGS = ['wcag2a', 'wcag2aa', 'wcag21aa'];
 
 /**
  * 指定 URL をサーバーサイドでスキャンし、axe-core の結果を返す。
@@ -11,8 +15,34 @@ import { logger } from '../logger.js';
  * @returns {Promise<{ violationsCount: number, criticalCount: number, seriousCount: number, resultJson: object }>}
  */
 export async function scanUrl(url) {
-  // TODO: Phase 2-2 で実装
-  // puppeteer でページを開き、axe-core を注入してスキャン結果を取得する
-  logger.warn({ url }, 'scanUrl: Phase 2-2 未実装');
-  throw new Error('Server-side scan not yet implemented (Phase 2-2)');
+  let browser;
+  try {
+    browser = await puppeteer.launch({
+      headless: true,
+      args: ['--no-sandbox', '--disable-setuid-sandbox', '--disable-dev-shm-usage'],
+    });
+
+    const page = await browser.newPage();
+
+    // タイムアウト付きでページを開く
+    await page.goto(url, { waitUntil: 'networkidle2', timeout: 30000 });
+
+    // axe-core をページに注入して実行
+    await page.addScriptTag({ path: axeCorePath });
+    const results = await page.evaluate((tags) => {
+      return window.axe.run(document, {
+        runOnly: { type: 'tag', values: tags },
+      });
+    }, AXE_TAGS);
+
+    const violations = results.violations ?? [];
+    return {
+      violationsCount: violations.length,
+      criticalCount: violations.filter((v) => v.impact === 'critical').length,
+      seriousCount: violations.filter((v) => v.impact === 'serious').length,
+      resultJson: results,
+    };
+  } finally {
+    if (browser) await browser.close();
+  }
 }

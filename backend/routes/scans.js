@@ -1,7 +1,9 @@
 import { Router } from 'express';
-import { query, param, validationResult } from 'express-validator';
+import { body, query, param, validationResult } from 'express-validator';
 import { pool } from '../db/pool.js';
-import { requireAuth } from '../middleware/auth.js';
+import { requireAuth, requirePlan } from '../middleware/auth.js';
+import { scanUrl } from '../services/scanner.js';
+import { logger } from '../logger.js';
 
 const router = Router();
 router.use(requireAuth);
@@ -38,6 +40,46 @@ router.get(
       [siteId, limit, offset],
     );
     res.json(rows);
+  },
+);
+
+/**
+ * POST /api/scans — サーバーサイドで手動スキャンを実行する（Agency プランのみ）。
+ * cron を待たずにスキャンをテストするためにも使用する。
+ */
+router.post(
+  '/',
+  requirePlan('agency'),
+  body('siteId').isUUID(),
+  async (req, res) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) return res.status(400).json({ errors: errors.array() });
+
+    const { siteId } = req.body;
+    const { rows: siteRows } = await pool.query(
+      `SELECT id, url FROM sites WHERE id = $1 AND user_id = $2 AND deleted_at IS NULL`,
+      [siteId, req.user.userId],
+    );
+    if (!siteRows.length) return res.status(404).json({ error: 'Site not found' });
+
+    const site = siteRows[0];
+    let result;
+    try {
+      result = await scanUrl(site.url);
+    } catch (err) {
+      logger.error({ err, siteId, url: site.url }, 'Manual scan failed');
+      return res.status(502).json({ error: 'Scan failed', detail: err.message });
+    }
+
+    const { rows } = await pool.query(
+      `INSERT INTO scans
+         (site_id, triggered_by, violations_count, critical_count, serious_count, result_json)
+       VALUES ($1, 'manual', $2, $3, $4, $5)
+       RETURNING *`,
+      [siteId, result.violationsCount, result.criticalCount, result.seriousCount, JSON.stringify(result.resultJson)],
+    );
+    logger.info({ siteId, url: site.url, violations: result.violationsCount }, 'Manual scan saved');
+    res.status(201).json(rows[0]);
   },
 );
 
