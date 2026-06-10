@@ -1,7 +1,12 @@
 node_modules/
+backend/node_modules/
+backend/.env
 e2e/.profile/
 e2e/.profiles/
 e2e/.test-ext/
 e2e/*.log
+scripts/.profiles/
+scripts/.test-ext/
+scripts/screenshots/raw/
 *.log
 .DS_Store
