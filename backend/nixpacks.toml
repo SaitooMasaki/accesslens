@@ -1,0 +1,29 @@
+# Railway (Nixpacks) の設定
+# Puppeteer が使う Chromium の実行に必要なシステムライブラリを追加する
+
+[phases.setup]
+nixPkgs = [
+  "chromium",
+  "nss",
+  "freetype",
+  "harfbuzz",
+  "ca-certificates",
+  "glib",
+  "dbus",
+  "at-spi2-atk",
+  "cups",
+  "libdrm",
+  "expat",
+  "libxcb",
+  "libxkbcommon",
+  "mesa",
+  "xorg.libX11",
+  "xorg.libXcomposite",
+  "xorg.libXdamage",
+  "xorg.libXext",
+  "xorg.libXfixes",
+  "xorg.libXrandr",
+]
+
+[start]
+cmd = "node server.js"

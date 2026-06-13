@@ -19,6 +19,10 @@ export async function scanUrl(url) {
   try {
     browser = await puppeteer.launch({
       headless: true,
+      // Railway など Linux コンテナでは PUPPETEER_EXECUTABLE_PATH でシステム Chromium を指定できる
+      ...(process.env.PUPPETEER_EXECUTABLE_PATH && {
+        executablePath: process.env.PUPPETEER_EXECUTABLE_PATH,
+      }),
       args: ['--no-sandbox', '--disable-setuid-sandbox', '--disable-dev-shm-usage'],
     });
 
