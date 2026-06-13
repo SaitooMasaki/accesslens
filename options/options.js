@@ -5,6 +5,7 @@ import {
   deactivateLicense,
   getCheckoutUrl
 } from '../licensing/lemonsqueezy.js';
+import { loginToBackend, logoutFromBackend } from '../sync/syncService.js';
 import { getSettings, saveSettings } from '../storage/store.js';
 
 const els = {
@@ -140,6 +141,8 @@ async function onActivate() {
     const result = await activateLicense(key);
     if (result.activated) {
       els.licenseMessage.textContent = `Activated! Plan: ${result.plan}`;
+      // Agency プランならバックエンドにもログインしてクラウド同期を有効化する
+      if (result.plan === 'agency') loginToBackend(key).catch(() => {});
       await loadLicense();
     } else {
       els.licenseMessage.textContent = `Activation failed: ${formatLicenseError(result.error)}`;
@@ -157,6 +160,8 @@ async function onDeactivate() {
     if (result.deactivated) {
       els.licenseMessage.textContent = 'License deactivated. You are back on the Free plan.';
       els.licenseKey.value = '';
+      // バックエンドの JWT も削除してクラウド同期を無効化する
+      await logoutFromBackend();
       await loadLicense();
     } else {
       els.licenseMessage.textContent = `Deactivation failed: ${formatLicenseError(result.error)}`;

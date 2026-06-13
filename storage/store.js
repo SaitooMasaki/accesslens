@@ -30,7 +30,8 @@ async function listClients() {
   return activeRecords(await getAll(KEYS.clients));
 }
 
-async function saveClient(client) {
+async function saveClient(client, { skipSync = false } = {}) {
+  if (!skipSync) markPendingSync(client);
   const clients = await getAll(KEYS.clients);
   const idx = clients.findIndex((c) => c.id === client.id);
   if (idx >= 0) clients[idx] = client;
@@ -55,7 +56,8 @@ async function listProjects(clientId) {
   return clientId ? projects.filter((p) => p.clientId === clientId) : projects;
 }
 
-async function saveProject(project) {
+async function saveProject(project, { skipSync = false } = {}) {
+  if (!skipSync) markPendingSync(project);
   const projects = await getAll(KEYS.projects);
   const idx = projects.findIndex((p) => p.id === project.id);
   if (idx >= 0) projects[idx] = project;

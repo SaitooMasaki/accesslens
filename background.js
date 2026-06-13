@@ -5,6 +5,7 @@
 // 実際にページ内で axe-core を動かすランナーは content/content.js が担う。
 
 import { validateLicense, needsRevalidation, getStoredLicense } from './licensing/lemonsqueezy.js';
+import { syncAll } from './sync/syncService.js';
 
 const REVALIDATE_ALARM = 'al_revalidate_license';
 const SCAN_TIMEOUT_MS = 45000; // axe-core は複雑なページで数十秒かかることがあるため余裕を持たせる
@@ -21,13 +22,16 @@ function debugLog(...args) {
   console.log('[AccessLens]', ...args);
 }
 
+// 起動・インストール時にクラウド同期を試みる（Agency プランで JWT があれば実行）
 chrome.runtime.onInstalled.addListener(() => {
+  syncAll().catch(() => {});
   chrome.alarms.create(REVALIDATE_ALARM, { periodInMinutes: 60 * 24 });
   revalidateIfNeeded();
 });
 
 chrome.runtime.onStartup.addListener(() => {
   revalidateIfNeeded();
+  syncAll().catch(() => {});
 });
 
 chrome.alarms.onAlarm.addListener((alarm) => {

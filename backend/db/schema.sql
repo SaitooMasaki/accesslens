@@ -39,6 +39,22 @@ CREATE TABLE IF NOT EXISTS scans (
   scanned_at       TIMESTAMPTZ NOT NULL DEFAULT NOW()
 );
 
+-- クラウド同期レコード（Phase 2-4）
+-- 拡張機能の clients / projects をそのまま JSONB で保持する。
+-- UUID は拡張機能側で生成したものをそのまま PK に使う（CLAUDE.md 参照）。
+CREATE TABLE IF NOT EXISTS sync_records (
+  id         UUID NOT NULL,
+  user_id    UUID NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+  collection TEXT NOT NULL,           -- 'clients' | 'projects'
+  data       JSONB NOT NULL,
+  updated_at TIMESTAMPTZ NOT NULL,
+  deleted_at TIMESTAMPTZ,
+  PRIMARY KEY (id, user_id, collection)
+);
+
+CREATE INDEX IF NOT EXISTS idx_sync_records_user_col
+  ON sync_records(user_id, collection, updated_at DESC);
+
 -- インデックス
 CREATE INDEX IF NOT EXISTS idx_sites_user_id    ON sites(user_id);
 CREATE INDEX IF NOT EXISTS idx_sites_deleted_at ON sites(deleted_at) WHERE deleted_at IS NOT NULL;
