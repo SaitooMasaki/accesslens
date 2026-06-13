@@ -31,7 +31,7 @@ const CHECKOUT_URLS = {
   // Agency はまだ Phase2機能(定期スキャン/メールダイジェスト/クラウド同期)が
   // 未実装のため、商品自体を未作成 or 非公開のままにしておくこと。
   // 実装が完了し、Lemon Squeezy側で商品を公開したらURLをここに差し替える。
-  agency: 'https://saitoomasaki.lemonsqueezy.com/checkout/buy/961b145c-1ee5-4a11-b742-fd7fc5044941'
+  agency: 'https://saitoomasaki.lemonsqueezy.com/checkout/buy/961b145c-1ee5-4a11-b742-fd7fc5044941?variant=1787048'
 };
 
 // variant_id -> plan のマッピング。実際のVariant IDに差し替えること。
