@@ -5,7 +5,7 @@ const LS_BASE = 'https://api.lemonsqueezy.com/v1';
 // Phase 1 の licensing/lemonsqueezy.js の VARIANT_PLAN_MAP と同期させること
 const VARIANT_PLAN_MAP = {
   1762636: 'pro',
-  // Agency Variant IDが決まったら追加する
+  1787048: 'agency',
 };
 
 /**
