@@ -31,13 +31,13 @@ const CHECKOUT_URLS = {
   // Agency はまだ Phase2機能(定期スキャン/メールダイジェスト/クラウド同期)が
   // 未実装のため、商品自体を未作成 or 非公開のままにしておくこと。
   // 実装が完了し、Lemon Squeezy側で商品を公開したらURLをここに差し替える。
-  agency: 'https://accesslens.lemonsqueezy.com/buy/REPLACE_WITH_AGENCY_VARIANT_UUID'
+  agency: 'https://saitoomasaki.lemonsqueezy.com/checkout/buy/961b145c-1ee5-4a11-b742-fd7fc5044941'
 };
 
 // variant_id -> plan のマッピング。実際のVariant IDに差し替えること。
 const VARIANT_PLAN_MAP = {
-  1762636: 'pro'
-  // Agency の Variant ID は商品作成後にここへ追加する
+  1762636: 'pro',
+  1787048: 'agency'
 };
 
 async function getStoredLicense() {

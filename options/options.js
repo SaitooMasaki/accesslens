@@ -95,13 +95,7 @@ function bindEvents() {
 
   els.upgradePro.addEventListener('click', () => chrome.tabs.create({ url: getCheckoutUrl('pro') }));
 
-  // Agency はまだ Phase2機能(定期スキャン/メールダイジェスト/クラウド同期)が
-  // 未実装で、Lemon Squeezy側の商品ページもまだ用意できていない。
-  // ここでチェックアウトに飛ばすと404になり購入者を混乱させるため、
-  // 商品の公開準備が整うまではボタンを非活性にし、案内文に差し替えておく。
-  els.upgradeAgency.disabled = true;
-  els.upgradeAgency.title = 'Agency plan is coming soon — not available for purchase yet.';
-  els.upgradeAgency.textContent = 'Coming soon';
+  els.upgradeAgency.addEventListener('click', () => chrome.tabs.create({ url: getCheckoutUrl('agency') }));
 }
 
 function onLogoSelected(e) {
