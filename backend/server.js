@@ -10,6 +10,7 @@ import sitesRouter from './routes/sites.js';
 import scansRouter from './routes/scans.js';
 import webhookRouter from './routes/webhook.js';
 import syncRouter from './services/sync.js';
+import unsubscribeRouter from './routes/unsubscribe.js';
 
 const app = express();
 
@@ -25,6 +26,7 @@ app.use('/api/auth', authRouter);
 app.use('/api/sites', sitesRouter);
 app.use('/api/scans', scansRouter);
 app.use('/api/sync', syncRouter);
+app.use('/api/unsubscribe', unsubscribeRouter);
 
 app.get('/health', (_req, res) => res.json({ status: 'ok', ts: new Date().toISOString() }));
 
