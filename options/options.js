@@ -25,8 +25,7 @@ const els = {
   deactivateBtn: document.getElementById('al-deactivate-btn'),
   licenseMessage: document.getElementById('al-license-message'),
 
-  upgradePro: document.getElementById('al-upgrade-pro'),
-  upgradeAgency: document.getElementById('al-upgrade-agency')
+  upgradePro: document.getElementById('al-upgrade-pro')
 };
 
 let pendingLogoDataUrl = null;
@@ -94,8 +93,6 @@ function bindEvents() {
   els.deactivateBtn.addEventListener('click', onDeactivate);
 
   els.upgradePro.addEventListener('click', () => chrome.tabs.create({ url: getCheckoutUrl('pro') }));
-
-  els.upgradeAgency.addEventListener('click', () => chrome.tabs.create({ url: getCheckoutUrl('agency') }));
 }
 
 function onLogoSelected(e) {
