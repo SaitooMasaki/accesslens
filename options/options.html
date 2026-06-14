@@ -60,6 +60,44 @@
       <p id="al-license-message" class="al-hint"></p>
     </section>
 
+    <section class="al-card" id="al-sites-section">
+      <h2>Monitored Sites</h2>
+      <p class="al-hint">Sites added here are automatically scanned on your chosen schedule.</p>
+
+      <p id="al-sites-gate" class="al-hint" hidden>
+        Site monitoring is an Agency plan feature.
+        <button id="al-sites-upgrade" class="al-link-btn">Upgrade</button>
+      </p>
+
+      <p id="al-sites-loading" class="al-hint" hidden>Loading…</p>
+      <p id="al-sites-error" class="al-sites-error" hidden></p>
+      <p id="al-sites-empty" class="al-hint" hidden>No sites yet. Add your first site to enable monitoring.</p>
+
+      <table id="al-sites-table" class="al-sites-table" hidden>
+        <thead>
+          <tr>
+            <th>Label / URL</th>
+            <th>Interval</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody id="al-sites-tbody"></tbody>
+      </table>
+
+      <form id="al-site-form" class="al-site-form">
+        <div class="al-site-form-fields">
+          <input type="url" id="al-site-url" placeholder="https://example.com" required />
+          <input type="text" id="al-site-label" placeholder="Label (optional)" />
+          <select id="al-site-interval">
+            <option value="weekly">Weekly</option>
+            <option value="daily">Daily</option>
+          </select>
+          <button type="submit" id="al-site-add-btn" class="al-btn al-btn-primary">Add site</button>
+        </div>
+        <p id="al-site-form-error" class="al-sites-error" hidden></p>
+      </form>
+    </section>
+
     <section class="al-card">
       <h2>Pricing plans</h2>
       <table class="al-plan-table">

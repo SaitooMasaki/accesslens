@@ -7,6 +7,7 @@ import {
 } from '../licensing/lemonsqueezy.js';
 import { loginToBackend, logoutFromBackend } from '../sync/syncService.js';
 import { getSettings, saveSettings } from '../storage/store.js';
+import { initSites } from './sitesManager.js';
 
 const els = {
   companyName: document.getElementById('al-company-name'),
@@ -34,6 +35,7 @@ async function init() {
   await loadSettings();
   await loadLicense();
   bindEvents();
+  await initSites();
 }
 
 async function loadSettings() {
