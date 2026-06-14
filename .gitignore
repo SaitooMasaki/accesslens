@@ -10,3 +10,7 @@ scripts/.test-ext/
 scripts/screenshots/raw/
 *.log
 .DS_Store
+*.zip
+TEST_SCENARIOS.md
+assets/screenshots/
+backend/capture-screenshots.js
